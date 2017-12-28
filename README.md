@@ -1,4 +1,3 @@
-
 # API仕様書
 
 ## Health Check
@@ -46,31 +45,33 @@
 - Parameters
     - title : String
     - body : String
-
+  
 ##### response
 
 ```
 {
-    "code": "success",
-    "todos": [
-	{
-	    "id": [id],
-	    "title": [title],
-	    "body": [body],
-	    "created_at": [datetime],
-	    "updated_at": [datetime]
-	},
-	{
-	    "id": [id],
-	    "title": [title],
-	    "body": [body],
-	    "created_at": [datetime],
-	    "updated_at": [datetime]
-	},
-	{
-	    ...
-	}, ...
-    ]
+  "code": "success",
+  "todos": [
+    {
+      "id": [id],
+      "title": [title],
+      "body": [body],
+      "status": [status],
+      "created_at": [datetime],
+      "updated_at": [datetime]
+    }, 
+    {
+      "id": [id],
+      "title": [title],
+      "body": [body],
+      "status": [status],
+      "created_at": [datetime],
+      "updated_at": [datetime]
+    }, 
+    {
+        ...
+    }, ...
+  ]
 }
 ```
 
@@ -81,13 +82,13 @@
 - Headers
 - Parameters
   - JSON: required
-
+  
 ```
 {
-    "todo": {
-	"title": String,
-	"body": String
-    }
+  "todo": {
+    "title": String,
+    "body": String
+  }
 }
 ```
 
@@ -95,12 +96,15 @@
 
 ```
 {
-    "code": "success",
-    "todo": {
-	"id": Long,
-	"title": String,
-	"body": String
-    }
+  "code": "success",
+  "todo": {
+    "id": Long,
+    "title": String,
+    "body": String
+    "status": Int,
+    "created_at": DateTime,
+    "updated_at": DateTime
+  }
 }
 ```
 
@@ -114,19 +118,20 @@
 
 - Headers
 - Parameters
-
+  
 ##### response
 
 ```
 {
-    "code": "success",
-    "todo": {
-	"id": [id],
-	"title": [title],
-	"body": [body],
-	"created_at": [datetime],
-	"updated_at": [datetime]
-    }
+  "code": "success",
+  "todo": {
+    "id": [id],
+    "title": [title],
+    "body": [body],
+    "status": [status],
+    "created_at": [datetime],
+    "updated_at": [datetime]
+  }
 }
 ```
 
@@ -137,14 +142,17 @@
 - Headers
 - Parameters
   - JSON: required
-
+  
 ```
 {
-    "todo": {
-	"id": Long,
-	"title": String,
-	"body": String
-    }
+  "todo": {
+    "id": Long,
+    "title": String,
+    "body": String,
+    "status": Int,
+    "created_at": DateTime,
+    "updated_at": DateTime
+  }
 }
 ```
 
@@ -152,12 +160,15 @@
 
 ```
 {
-    "code": "success",
-    "todo": {
-	"id": Long,
-	"title": String,
-	"body": String
-    }
+  "code": "success",
+  "todo": {
+    "id": Long,
+    "title": String,
+    "body": String,
+    "status": Int,
+    "created_at": DateTime,
+    "updated_at": DateTime
+  }
 }
 ```
 
@@ -168,12 +179,13 @@
 - Headers
 - Parameters
   - JSON: required
-
+  
 ```
 {
-    "todo": {
-	"body": String
-    }
+  "todo": {
+    "body": [body],
+    "status": [status]
+  }
 }
 ```
 
@@ -181,12 +193,15 @@
 
 ```
 {
-    "code": "success",
-    "todo": {
-	"id": Long,
-	"title": String,
-	"body": String
-    }
+  "code": "success",
+  "todo": {
+    "id": Long,
+    "title": String,
+    "body": String,
+    "status": Int,
+    "created_at": DateTime,
+    "updated_at": DateTime
+  }
 }
 ```
 
