@@ -5,6 +5,6 @@ CREATE TABLE todo_list_scala.todo (
   title VARCHAR (255),
   body TEXT,
   status INT ,
-  created_at DATETIME,
-  updated_at DATETIME
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

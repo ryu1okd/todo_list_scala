@@ -6,14 +6,14 @@ import com.github.ryu1okd.routes._
 /**
   * server object
   */
-object WebServer extends HttpApp with TodoRoutes {
+object WebServer extends HttpApp with TodoRoutes with HealthCheckRoutes {
 
   override def routes: Route = {
     pathEndOrSingleSlash {
       get {
         complete("Hello ToDo List made by Scala.")
       }
-    } ~ todoRoutes
+    } ~ healthCheckRoutes ~ todoRoutes
   }
 
 }
