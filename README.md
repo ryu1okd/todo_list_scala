@@ -1,4 +1,4 @@
-# API仕様書
+# TODO LIST API specification document
 
 ## Health Check
 
@@ -17,20 +17,8 @@
 
 ```
 {
-    "code": "success"
+    "status": "ok"
 }
-```
-
-###### ERROR
-
-```
-
-{
-    "code": "error",
-    "title": [ERROR TITLE]
-    "message": [ERROR MESSAGE]
-}
-
 ```
 
 ## Todo
@@ -49,9 +37,7 @@
 ##### response
 
 ```
-{
-  "code": "success",
-  "todos": [
+  [
     {
       "id": [id],
       "title": [title],
@@ -72,7 +58,6 @@
         ...
     }, ...
   ]
-}
 ```
 
 #### POST
@@ -85,10 +70,8 @@
   
 ```
 {
-  "todo": {
-    "title": String,
-    "body": String
-  }
+  "title": String,
+  "body": String
 }
 ```
 
@@ -96,15 +79,12 @@
 
 ```
 {
-  "code": "success",
-  "todo": {
-    "id": Long,
-    "title": String,
-    "body": String
-    "status": Int,
-    "created_at": DateTime,
-    "updated_at": DateTime
-  }
+  "id": Long,
+  "title": String,
+  "body": String
+  "status": Int,
+  "created_at": DateTime,
+  "updated_at": DateTime
 }
 ```
 
@@ -123,15 +103,12 @@
 
 ```
 {
-  "code": "success",
-  "todo": {
-    "id": [id],
-    "title": [title],
-    "body": [body],
-    "status": [status],
-    "created_at": [datetime],
-    "updated_at": [datetime]
-  }
+  "id": [id],
+  "title": [title],
+  "body": [body],
+  "status": [status],
+  "created_at": [datetime],
+  "updated_at": [datetime]
 }
 ```
 
@@ -145,14 +122,12 @@
   
 ```
 {
-  "todo": {
-    "id": Long,
-    "title": String,
-    "body": String,
-    "status": Int,
-    "created_at": DateTime,
-    "updated_at": DateTime
-  }
+  "id": Long,
+  "title": String,
+  "body": String,
+  "status": Int,
+  "created_at": DateTime,
+  "updated_at": DateTime
 }
 ```
 
@@ -160,15 +135,12 @@
 
 ```
 {
-  "code": "success",
-  "todo": {
-    "id": Long,
-    "title": String,
-    "body": String,
-    "status": Int,
-    "created_at": DateTime,
-    "updated_at": DateTime
-  }
+  "id": Long,
+  "title": String,
+  "body": String,
+  "status": Int,
+  "created_at": DateTime,
+  "updated_at": DateTime
 }
 ```
 
@@ -182,10 +154,8 @@
   
 ```
 {
-  "todo": {
-    "body": [body],
-    "status": [status]
-  }
+  "body": [body],
+  "status": [status]
 }
 ```
 
@@ -193,15 +163,12 @@
 
 ```
 {
-  "code": "success",
-  "todo": {
-    "id": Long,
-    "title": String,
-    "body": String,
-    "status": Int,
-    "created_at": DateTime,
-    "updated_at": DateTime
-  }
+  "id": Long,
+  "title": String,
+  "body": String,
+  "status": Int,
+  "created_at": DateTime,
+  "updated_at": DateTime
 }
 ```
 
@@ -216,7 +183,7 @@
 
 ```
 {
-    "code": "success"
+  "status": "ok"
 }
 ```
 
