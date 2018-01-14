@@ -15,8 +15,8 @@ object TodoService {
     }
   }
 
-  def findById(id: Option[Long]): Future[Option[Todo]] = {
-    Todos.find(id)
+  def findById(id: Long): Future[Option[Todo]] = {
+    Todos.find(Some(id))
   }
 
   def add(todo: Todo): Future[Option[Todo]] = {
@@ -26,11 +26,8 @@ object TodoService {
     } yield newTodo
   }
 
-  def update(todo: Todo): Future[Option[Todo]] = {
-    for {
-      updatedRowsCount <- Todos.update(todo)
-      updatedTodo <- Todos.find(todo.id) if updatedRowsCount > 0
-    } yield updatedTodo
+  def update(todo: Todo): Future[Int] = {
+    Todos.update(todo)
   }
 
   def delete(id: Long): Future[Boolean] = {

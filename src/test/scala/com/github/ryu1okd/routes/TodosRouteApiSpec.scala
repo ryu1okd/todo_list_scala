@@ -27,7 +27,7 @@ class TodosRouteApiSpec extends WordSpec with Matchers with ScalatestRouteTest w
           |}
         """.stripMargin
       Post("/todos").withEntity(ContentTypes.`application/json`, todoJson) ~> todoRoutes ~> check {
-        status should equal(StatusCodes.OK)
+        status should equal(StatusCodes.Created)
         responseAs[Todo].title should equal("TEST TITLE")
         responseAs[Todo].body should equal("TEST BODY FROM TodosRouteApiSpec")
       }
@@ -59,10 +59,31 @@ class TodosRouteApiSpec extends WordSpec with Matchers with ScalatestRouteTest w
       }
     }
 
-    "when colling Delete '/todos/3 delete todo " in {
-      Delete("/todos/8") ~> todoRoutes ~> check {
+    "when colling Put '/todos/4' should create Todo " in {
+      val todoJson =
+        """
+          |{
+          |  "id":4,
+          |  "title":"Created On Put",
+          |  "body":" BODY FROM TodosRouteApiSpec",
+          |  "status":0
+          |}
+        """.stripMargin
+      Put("/todos/4").withEntity(ContentTypes.`application/json`, todoJson) ~> todoRoutes ~> check {
+        status should equal(StatusCodes.Created)
+      }
+    }
+
+    "when colling Delete '/todos/1' delete todo " in {
+      Delete("/todos/1") ~> todoRoutes ~> check {
         status should equal(StatusCodes.OK)
         responseAs[String] shouldEqual "{\"status\":\"ok\"}"
+      }
+    }
+
+    "when colling Get '/todos/1' 404 NotFound " in {
+      Get("/todos/1") ~> todoRoutes ~> check {
+        status should equal(StatusCodes.NotFound)
       }
     }
   }
