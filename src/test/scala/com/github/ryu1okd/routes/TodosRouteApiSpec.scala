@@ -12,8 +12,14 @@ class TodosRouteApiSpec extends WordSpec with Matchers with ScalatestRouteTest w
 
   "TodosRoutes " should {
     "when colling Get '/todos' should return Todo json list " in {
-      Get("/todos") ~> todoRoutes ~> check{
+      Get("/todos") ~> todoRoutes ~> check {
         responseAs[Seq[Todo]] should have length 2
+      }
+    }
+
+    "when colling Get '/todos?q=2' should return length 1" in {
+      Get("/todos?q=2") ~> todoRoutes ~> check {
+        responseAs[Seq[Todo]] should have length 1
       }
     }
 

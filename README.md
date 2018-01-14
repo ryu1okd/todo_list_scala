@@ -31,8 +31,7 @@
 
 - Headers
 - Parameters
-    - title : String
-    - body : String
+    - q : String
   
 ##### response
 
@@ -72,6 +71,7 @@
 {
   "title": String,
   "body": String
+  "status": Int
 }
 ```
 
