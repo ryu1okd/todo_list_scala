@@ -1,14 +1,14 @@
 package com.github.ryu1okd.routes
 
+import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import akka.http.scaladsl.server.Directives._
-import com.github.ryu1okd.models.{HealthCheck, HealthCheckProtocol}
 
-trait HealthCheckRoutes extends HealthCheckProtocol {
+trait HealthCheckRoutes {
 
   lazy val healthCheckRoutes =
     path("health_check") {
       get {
-        complete(HealthCheck("ok"))
+        complete(HttpEntity(ContentTypes.`application/json`, "{\"status\":\"ok\"}"))
       }
     }
 }
