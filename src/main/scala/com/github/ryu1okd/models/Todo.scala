@@ -7,7 +7,7 @@ import com.github.tototoshi.slick.MySQLJodaSupport._
 import spray.json._
 import com.github.ryu1okd.protocols.DateTimeJsonProtocol._
 import slick.ast.ColumnOption.{AutoInc, PrimaryKey}
-import slick.sql.SqlProfile.ColumnOption.{NotNull, Nullable, SqlType}
+import slick.sql.SqlProfile.ColumnOption.SqlType
 
 
 import scala.concurrent.Future
@@ -46,8 +46,12 @@ object Todos extends TableQuery(new Todos(_)){
     db.run(( this returning this.map(_.id) ) += todo )
   }
 
-  def update(todo: Todo): Unit = {
+  def update(todo: Todo): Future[Int] = {
     db.run(this.filter(_.id === todo.id).update(todo))
+  }
+
+  def delete(id: Option[Long]): Future[Int] = {
+    db.run(this.filter(_.id === id).delete)
   }
 
   def findByText(q: String): Future[Seq[Todo]] = {

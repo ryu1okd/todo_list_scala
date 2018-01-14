@@ -1,7 +1,8 @@
 package com.github.ryu1okd.routes
 
+import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import akka.http.scaladsl.server.Directives._
-import com.github.ryu1okd.models.{Todo, TodoJsonProtocol, Todos}
+import com.github.ryu1okd.models.{Todo, TodoJsonProtocol}
 import com.github.ryu1okd.services.TodoService
 
 trait TodoRoutes extends TodoJsonProtocol {
@@ -21,6 +22,13 @@ trait TodoRoutes extends TodoJsonProtocol {
       } ~ path(LongNumber) { id =>
         get {
           complete(TodoService.findById(Some(id)))
+        } ~ put {
+          entity(as[Todo]) { todo =>
+            complete(TodoService.update(todo))
+          }
+        } ~ delete {
+          val isDeleted = TodoService.delete(id)
+          complete(HttpEntity(ContentTypes.`application/json`, "{\"status\":\"ok\"}"))
         }
       }
     }
