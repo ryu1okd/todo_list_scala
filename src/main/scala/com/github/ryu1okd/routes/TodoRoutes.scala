@@ -14,8 +14,8 @@ trait TodoRoutes extends TodoJsonProtocol {
     pathPrefix("todos") {
       pathEndOrSingleSlash {
         get {
-          parameter('q.?) { q =>
-            complete(TodoService.find(q))
+          parameter('q.?, 'status.?) { (q, status) =>
+            complete(TodoService.find(q, status))
           }
         } ~ post {
           entity(as[Todo]) { todo =>

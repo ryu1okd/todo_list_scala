@@ -34,14 +34,6 @@ object Todos extends TableQuery(new Todos(_)){
 
   private val db = Database.forConfig("mysql")
 
-  def findAll: Future[Seq[Todo]] = {
-    db.run(this.result)
-  }
-
-  def find(id: Option[Long]): Future[Option[Todo]] = {
-    db.run(this.filter(_.id === id).result.headOption)
-  }
-
   def create(todo: Todo): Future[Option[Long]] = {
     db.run(( this returning this.map(_.id) ) += todo )
   }
@@ -54,7 +46,24 @@ object Todos extends TableQuery(new Todos(_)){
     db.run(this.filter(_.id === id).delete)
   }
 
-  def findByText(q: String): Future[Seq[Todo]] = {
-    db.run(this.filter(p => (p.title like s"%${q}%") || (p.body like s"%${q}%")).result)
+  def findAll: Future[Seq[Todo]] = {
+    db.run(this.result)
   }
+
+  def find(id: Option[Long]): Future[Option[Todo]] = {
+    db.run(this.filter(_.id === id).result.headOption)
+  }
+
+  def findByText(q: String): Future[Seq[Todo]] = {
+    db.run(this.filter(t => (t.title like s"%${q}%") || (t.body like s"%${q}%")).result)
+  }
+
+  def findByTextAndStatus(q: String, status: Int): Future[Seq[Todo]] = {
+    db.run(this.filter(t => ((t.title like s"%${q}%") || (t.body like s"%${q}%")) && t.status === status).result)
+  }
+
+  def findByStatus(status: Int): Future[Seq[Todo]] = {
+    db.run(this.filter(_.status === status).result)
+  }
+
 }

@@ -23,6 +23,20 @@ class TodosRouteApiSpec extends WordSpec with Matchers with ScalatestRouteTest w
       }
     }
 
+    "when colling Get '/todos?status=0' should return status = 0" in {
+      Get("/todos?status=0") ~> todoRoutes ~> check {
+        responseAs[Seq[Todo]].map(_.status) should contain only(0)
+      }
+    }
+
+    "Get '/todos?q=TITLE&status=1' should return 1 item " in {
+      Get("/todos?q=TITLE&status=1") ~> todoRoutes ~> check {
+        responseAs[Seq[Todo]] should have length 1
+        responseAs[Seq[Todo]].map(t => t.title + " " + t.body).foreach( _ should include("TITLE"))
+        responseAs[Seq[Todo]].map(_.status) should contain only(1)
+      }
+    }
+
     "when colling Post '/todos' should create Todo and retrun created Todo" in {
       val todoJson =
         """

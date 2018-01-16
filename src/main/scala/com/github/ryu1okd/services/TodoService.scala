@@ -7,11 +7,12 @@ import scala.concurrent.Future
 
 object TodoService {
 
-
-  def find(query: Option[String]): Future[Seq[Todo]] = {
-    query match {
-      case Some(q) => Todos.findByText(q)
-      case None => Todos.findAll
+  def find(query: Option[String], status: Option[String]): Future[Seq[Todo]] = {
+    (query, status) match {
+      case (Some(q), Some(status)) => Todos.findByTextAndStatus(q, status.toInt)
+      case (None, Some(status)) => Todos.findByStatus(status.toInt)
+      case (Some(q), None) => Todos.findByText(q)
+      case (None, None) => Todos.findAll
     }
   }
 
